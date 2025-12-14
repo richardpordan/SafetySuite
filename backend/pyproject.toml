@@ -1,0 +1,59 @@
+[project]
+name = "safetysuite"
+version = "0.1.0"
+description = "H&S Management App"
+readme = "README.md"
+requires-python = ">=3.13"
+
+dependencies = [
+    "alembic>=1.17.2",
+    "fastapi>=0.124.0",
+    "psycopg2>=2.9.11",
+    "sqlalchemy>=2.0.44",
+    "uvicorn>=0.38.0",
+]
+
+[dependency-groups]
+dev = [
+  "detect-secrets>=1.5.0",
+  "isort>=7.0.0",
+  "openpyxl>=3.1.5",
+  "pandas>=2.3.3",
+  "pre-commit>=4.5.0",
+  "pytest>=9.0.2",
+  "python-dotenv>=1.2.1",
+  "requests>=2.32.5",
+  "ruff>=0.14.8",
+]
+
+[tool.ruff]
+line-length = 79
+exclude = [
+    "alembic",
+    "docs",
+    ".venv",
+]
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle errors
+  "F",   # pyflakes (unused imports, undefined names)
+  "W",   # pycodestyle warnings
+  "I",   # isort (imports)
+  "UP",  # pyupgrade
+  "B",   # flake8-bugbear (logic bugs)
+  "SIM", # flake8-simplify
+  "C4",  # flake8-comprehensions
+  "T20", # flake8-print
+  "S",   # bandit (security)
+  "PL",  # pylint rules
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["backend/src"]
+
+[tool.ruff.lint.per-file-ignores]
+"backend/main_dev.py" = ["E402"]
+"backend/src/api/**" = ["B008"]
+"backend/tests/**" = ["S101", "PLR2004"]
+"backend/scripts/*.py" = ["T201"]
